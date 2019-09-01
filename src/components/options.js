@@ -53,7 +53,7 @@ class Options extends Component {
     return (
       <div className="options">
         <h4>Display options:</h4>
-        <table id="displayOptions">
+        <table className="display-options">
           { this.renderSingleOption({
               label: 'Chord Name',
               value: this.props.options.chordDisplayOn,
@@ -87,7 +87,7 @@ class Options extends Component {
         </table>
         <div>
           <h4>Chord options:</h4>
-          <table id="chordTypes">
+          <table className="chord-types">
             { this.renderChordData() }
           </table>
         </div>

@@ -8,7 +8,7 @@
   box-shadow: 1px 3px 5px 0 rgba(0, 0, 0, 0.2), 3px 5px 13px 0 rgba(0, 0, 0, 0.19);
 }
 
-.chordButton {
+.chord-button {
   color: #764462;
   font-weight: bold;
   background-color: #68A9A9;
@@ -23,16 +23,16 @@
   transition-duration: 0.4s;
 }
 
-.chordButton:hover {
+.chord-button:hover {
   background-color: #A1E0ED;
   color: #447276;
 }
 
-.plusButton {
+.plus-button {
   width: 20px;
   border-radius: 0 15px 15px 0;
 }
-.minusButton {
+.minus-button {
   width: 20px;
   border-radius: 15px 0 0 15px;
 }
@@ -58,23 +58,29 @@
   -webkit-appearance: none;
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-
-.fade-enter, .fade-leave-to {
+.display-animation-enter {
   opacity: 0;
+  height: 0;
 }
 
-.slide-fade-enter-active {
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+.display-animation-enter.display-animation-enter-active {
+  opacity: 1;
+  height: 4rem;
+  transition: height 150ms linear, opacity 150ms linear;
 }
 
-.slide-fade-leave-active {
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+.display-animation-exit {
+  opacity: 1;
+  height: 4rem;
 }
 
-.slide-fade-enter, .slide-fade-leave-to {
-  transform: translateX(10px);
+.display-animation-exit.display-animation-exit-active {
   opacity: 0;
+  height: 0;
+  transition: height 150ms linear, opacity 150ms linear;
+}
+
+.display-animation-exit-done {
+  opacity: 0;
+  height: 0;
 }
