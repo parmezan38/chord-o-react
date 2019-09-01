@@ -1,0 +1,44 @@
+.piano {
+  width: 50%;
+  padding: 15px;
+  margin: 10px auto;
+  background-color: #A96868;
+  border-radius: 30px;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.2), 1px 3px 9px 0 rgba(0, 0, 0, 0.19);
+}
+
+.piano-svg {
+  width: 100%;
+  height: 100%;
+  color: red;
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 1.5;
+}
+
+.piano-key {
+  stroke:#0D0C0E;
+  stroke-width: 2px;
+  -webkit-transition-duration: 120ms, 160ms;
+  -webkit-transition-property: stroke, fill;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-duration: 120ms, 160ms;
+  transition-property: stroke, fill;
+  transition-timing-function: ease-in-out;
+
+  &.white {
+    fill:#ebebeb;
+  }
+
+  &.black {
+    fill:#19171C;
+  }
+}
+
+.selected-key {
+  fill:#A1E0ED !important;
+  stroke:#447276 !important;
+  stroke-width: 2px;
+}
