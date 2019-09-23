@@ -19,15 +19,16 @@ class ChordMain extends Component {
     interval: null,
     options: {
       chords: chords,
-      show: false,
       chordDisplayOn: true,
       notesDisplayOn: true,
       keysDisplayOn: true,
       volume: 1
-    }
+    },
+    optionsDisplayOn: false
   }
 
   startCreateChordLoop = () => {
+    if (!this.areAnyChordsSelected()) return;
     const tempo = 60000 / this.state.bpm;
     this.setState({ interval: setInterval(() => this.setNewChord(), tempo) }); 
     this.setState({ isLooping: true });
@@ -44,6 +45,14 @@ class ChordMain extends Component {
     this.setState({ chordNotes });
     this.clearDisplayedNotes();
     this.addDisplayedNotes(newNotes);
+  }
+
+  areAnyChordsSelected = () => {
+    let selected = false;
+    this.state.options.chords.forEach(({ used }) => {
+      if (used) return (selected = true);
+    });
+    return selected;
   }
 
   incrementBpm = num => {
@@ -82,9 +91,8 @@ class ChordMain extends Component {
   }
 
   toggleShowOptions = () => {
-    const options = { ...this.state.options };
-    options.show = !options.show; 
-    this.setState({ options });
+    const optionsDisplayOn = !this.state.optionsDisplayOn; 
+    this.setState({ optionsDisplayOn });
   }
 
   updateOptions = options => this.setState({ options })
@@ -96,18 +104,19 @@ class ChordMain extends Component {
     return <button className="chord-button" onClick={ this.startCreateChordLoop }>Start</button>;
   }
 
-  renderOptions = () => <Options options={ this.state.options } updateOptions={ this.updateOptions }/>;
-
   render() { 
     return (
       <div className="chord">
         <button className="chord-button" onClick={ this.toggleShowOptions }>Options</button>
-        <CSSTransition
-          in={ this.state.options.show }
-          timeout={300}
-          classNames="options-animation">
-            <div>{ this.renderOptions() }</div>
-        </CSSTransition>
+        <div>
+          <CSSTransition
+            in={ this.state.optionsDisplayOn }
+            timeout={300}
+            unmountOnExit
+            classNames="options-animation">
+              <Options options={ this.state.options } updateOptions={ this.updateOptions }/>
+          </CSSTransition>
+        </div>
         <span>
           <button className="chord-button minus-button" onClick={ () => this.incrementBpm(-1) }>-</button>
           <input
@@ -121,19 +130,19 @@ class ChordMain extends Component {
         </span>
         <span>{ this.renderButtons() }</span>
         <CSSTransition
-          in={this.state.options.chordDisplayOn}
+          in={ this.state.options.chordDisplayOn }
           timeout={150}
           classNames="display-animation">
             <ChordName chordName={ this.state.chordName }/>
         </CSSTransition>
         <CSSTransition
-          in={this.state.options.notesDisplayOn}
+          in={ this.state.options.notesDisplayOn }
           timeout={150}
           classNames="display-animation">
             <ChordNotes chordNotes={ this.state.chordNotes }/>
         </CSSTransition>
         <CSSTransition
-          in={this.state.options.keysDisplayOn }
+          in={ this.state.options.keysDisplayOn }
           timeout={150}
           classNames="display-animation">
             <PianoKeys keyData={ this.state.keyData }/>

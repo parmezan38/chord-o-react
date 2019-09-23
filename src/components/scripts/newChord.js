@@ -1,11 +1,8 @@
 import notes from './notes';
 
 function newRandomRoot() {
-  const randomNumForRoot = Math.round(Math.random() * (notes.length - 1));
-  return {
-    note: notes[randomNumForRoot],
-    index: notes.indexOf(notes[randomNumForRoot])
-  };
+  const index = Math.round(Math.random() * (notes.length - 1));
+  return { note: notes[index], index };
 }
 
 function newRandomChord(chords) {

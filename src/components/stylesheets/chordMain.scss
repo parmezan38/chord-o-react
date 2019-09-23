@@ -84,3 +84,33 @@
   opacity: 0;
   height: 0;
 }
+
+.options-animation-appear.options-animation-appear-active.options-animation-appear-done {
+  opacity: 0;
+  transform: scale(1, 0);
+}
+
+.options-animation-enter {
+  opacity: 0;
+}
+
+.options-animation-enter.options-animation-enter-active {
+  opacity: 1;
+  transition: transform 150ms linear, opacity 150ms linear;
+}
+
+.options-animation-exit {
+  opacity: 1;
+  transform: scale(1, 1);
+}
+
+.options-animation-exit.options-animation-exit-active {
+  opacity: 0;
+  transform: scale(1, 0);
+  transition: transform 150ms linear, opacity 150ms linear;
+}
+
+.options-animation-exit-done {
+  opacity: 0;
+  transform: scale(1, 0);  
+}
